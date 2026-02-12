@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dem Fashion | Accueil Prestige</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root { --orange: #FF6600; --black: #050505; }
+        body { background-color: var(--black); color: white; font-family: 'Poppins', sans-serif; margin: 0; }
+
+        /* HEADER AVEC TON LOGO WHATSAPP */
+        .header-luxe {
+            background: rgba(0,0,0,0.95);
+            border-bottom: 2px solid var(--orange);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .brand-container { display: flex; align-items: center; justify-content: center; text-decoration: none; gap: 15px; }
+        .logo-img { height: 60px; border-radius: 5px; }
+        .brand-name { font-size: 1.8rem; font-weight: 900; letter-spacing: 4px; color: white; text-transform: uppercase; margin: 0; }
+        .brand-name span { color: var(--orange); }
+
+        /* HERO AVEC TA VIDÉO WHATSAPP */
+        .hero { height: 85vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .hero-video { position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.5; }
+        .btn-luxe { background: var(--orange); color: black; font-weight: bold; padding: 15px 45px; border-radius: 50px; text-decoration: none; transition: 0.4s; border: 2px solid var(--orange); }
+        .btn-luxe:hover { background: transparent; color: white; border-color: white; transform: scale(1.05); }
+
+        .viral-card { background: #111; border-radius: 20px; overflow: hidden; border: 1px solid #333; position: relative; }
+        .viral-video { width: 100%; height: 500px; object-fit: cover; }
+        .mute-toggle { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; z-index: 10; }
+
+        footer { background: #111; border-top: 3px solid var(--orange); padding: 50px 0; margin-top: 80px; text-align: center; }
+        .social-icon { font-size: 1.8rem; color: white; margin: 0 10px; transition: 0.3s; }
+        .social-icon:hover { color: var(--orange); }
+    </style>
+</head>
+<body>
+
+    <header class="header-luxe">
+        <a href="/" class="brand-container">
+            <img src="{% static 'images/WhatsApp Image 2026-02-12 at 14.43.55.jpeg' %}" alt="Logo" class="logo-img">
+            <h1 class="brand-name">DEM <span>FASHION</span></h1>
+        </a>
+    </header>
+
+    <div class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="{% static 'videos/WhatsApp Video 2026-02-12 at 14.44.32.mp4' %}" type="video/mp4">
+        </video>
+        <div class="text-center">
+            <h1 class="display-3 fw-bold mb-4">L'EXCELLENCE AU BOUT DES DOIGTS</h1>
+            <a href="/boutique" class="btn-luxe">VOIR LA BOUTIQUE</a>
+        </div>
+    </div>
+
+    <div class="container my-5 py-5">
+        <h2 class="text-center mb-5 fw-bold" style="letter-spacing: 5px;">NOTRE UNIVERS</h2>
+        <div class="row g-4">
+            {% for h in highlights %}
+            <div class="col-md-4">
+                <div class="viral-card">
+                    <button class="mute-toggle" onclick="toggleMute(this)"><i class="bi bi-volume-mute"></i></button>
+                    <video autoplay muted loop playsinline class="viral-video">
+                        <source src="{{ h.video_file.url }}" type="video/mp4">
+                    </video>
+                    <div class="p-3 text-center fw-bold text-uppercase small">{{ h.title }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        <div class="brand-container mb-4">
+            <img src="{% static 'images/WhatsApp Image 2026-02-12 at 14.43.55.jpeg' %}" style="height: 40px; border-radius: 3px;">
+            <span class="brand-name" style="font-size: 1.2rem; margin-left: 10px;">DEM <span>FASHION</span></span>
+        </div>
+        <div class="mb-4">
+            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+            <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
+        </div>
+        <p class="small text-secondary">© 2026 DEM FASHION. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function toggleMute(btn) {
+            const video = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            video.muted = !video.muted;
+            icon.className = video.muted ? 'bi bi-volume-mute' : 'bi bi-volume-up';
+        }
+    </script>
+</body>
+</html>
