@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-z!l=w^6aot5_3gx^6dp=ohttqipw%(4f56g9$+6&#pq0_(*th4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['DemFashion.pythonanywhere.com', 'www.DemFashion.pythonanywhere.com']
-
+# Remplace la ligne existante par celle-ci :
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
